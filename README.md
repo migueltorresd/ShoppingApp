@@ -158,5 +158,3 @@ ShoppingApp/
 - Optimizada para dispositivos Android API 24+
 
 ---
-
-**Desarrollado con ❤️ en Kotlin para Android**
