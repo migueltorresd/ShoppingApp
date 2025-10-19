@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="accent_orange">#FF9800</color>
+    <color name="background_card">#FAFAFA</color>
+    <color name="background_light">#F5F5F5</color>
+    <color name="background_white">#FFFFFF</color>
+    <color name="error_red">#F44336</color>
+    <color name="primary_blue">#2196F3</color>
+    <color name="primary_dark_blue">#1976D2</color>
+    <color name="purple_light">#E1BEE7</color>
+    <color name="success_green">#4CAF50</color>
+    <color name="teal_accent">#00BCD4</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="warning_yellow">#FFC107</color>
+    <string name="agrega_productos">Agrega productos desde la tienda</string>
+    <string name="agregar">Agregar</string>
+    <string name="app_name">Shopping App</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="bienvenido_usuario">¡Bienvenido %1$s!</string>
+    <string name="carrito_vaciado">Carrito vaciado</string>
+    <string name="carrito_vacio">Tu carrito está vacío</string>
+    <string name="completa_datos">Completa los datos para registrarte</string>
+    <string name="compra_exitosa">¡Compra Exitosa!</string>
+    <string name="confirmar_contrasena">Confirmar contraseña</string>
+    <string name="continuar_comprando">Continuar Comprando</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="correo_electronico">Correo electrónico</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="desliza_productos">Desliza para ver más productos</string>
+    <string name="finalizar_compra">Finalizar Compra</string>
+    <string name="inicia_sesion">Inicia sesión para continuar</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="items_carrito">Items en carrito: %1$d</string>
+    <string name="mi_carrito">Mi Carrito</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="producto_agregado">%1$s agregado al carrito</string>
+    <string name="productos_disponibles">Productos Disponibles</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="registro_exitoso">¡Registro exitoso! Ahora puedes iniciar sesión</string>
+    <string name="total_pagar">Total a pagar:</string>
+    <string name="usuario">Usuario</string>
+    <string name="vaciar_carrito">Vaciar Carrito</string>
+    <string name="ver_carrito">Ver Carrito</string>
+    <string name="ya_tienes_cuenta">¿Ya tienes cuenta? Inicia Sesión</string>
+    <style name="Theme.Material3.DayNight" parent="Theme.Material3.Light">
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorOnPrimary">@color/text_white</item>
+        <item name="colorSecondary">@color/accent_orange</item>
+        <item name="android:windowBackground">@color/background_light</item>
+    </style>
+    <style name="Theme.ShoppingApp" parent="Theme.AppCompat.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimaryVariant">@color/primary_dark_blue</item>
+        <item name="colorOnPrimary">@color/text_white</item>
+        
+        <item name="colorSecondary">@color/accent_orange</item>
+        <item name="colorSecondaryVariant">@color/accent_orange</item>
+        <item name="colorOnSecondary">@color/text_white</item>
+        
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+</resources>

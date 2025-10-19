@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shopping App</string>
+    
+    <!-- Login -->
+    <string name="bienvenido">Bienvenido</string>
+    <string name="inicia_sesion">Inicia sesión para continuar</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta? Regístrate</string>
+    
+    <!-- Registro -->
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="completa_datos">Completa los datos para registrarte</string>
+    <string name="nombre_completo">Nombre completo</string>
+    <string name="correo_electronico">Correo electrónico</string>
+    <string name="confirmar_contrasena">Confirmar contraseña</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="ya_tienes_cuenta">¿Ya tienes cuenta? Inicia Sesión</string>
+    
+    <!-- Productos -->
+    <string name="productos_disponibles">Productos Disponibles</string>
+    <string name="ver_carrito">Ver Carrito</string>
+    <string name="agregar">Agregar</string>
+    <string name="items_carrito">Items en carrito: %1$d</string>
+    <string name="desliza_productos">Desliza para ver más productos</string>
+    
+    <!-- Carrito -->
+    <string name="mi_carrito">Mi Carrito</string>
+    <string name="carrito_vacio">Tu carrito está vacío</string>
+    <string name="agrega_productos">Agrega productos desde la tienda</string>
+    <string name="total_pagar">Total a pagar:</string>
+    <string name="vaciar_carrito">Vaciar Carrito</string>
+    <string name="finalizar_compra">Finalizar Compra</string>
+    
+    <!-- Mensajes -->
+    <string name="producto_agregado">%1$s agregado al carrito</string>
+    <string name="registro_exitoso">¡Registro exitoso! Ahora puedes iniciar sesión</string>
+    <string name="bienvenido_usuario">¡Bienvenido %1$s!</string>
+    <string name="carrito_vaciado">Carrito vaciado</string>
+    <string name="compra_exitosa">¡Compra Exitosa!</string>
+    <string name="continuar_comprando">Continuar Comprando</string>
+</resources>
