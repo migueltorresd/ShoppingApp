@@ -1,73 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    android:orientation="vertical"
-    android:padding="32dp"
-    android:gravity="center">
+    android:background="@color/background_light"
+    android:fillViewport="true">
 
-    <!-- Título -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inicia sesión para continuar"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        android:layout_marginBottom="48dp" />
+        <!-- Logo/Icono de la App -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🛒"
+            android:textSize="64sp"
+            android:layout_marginBottom="24dp" />
 
-    <!-- Campo Usuario -->
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginBottom="16dp"
-        android:hint="Usuario"
-        android:background="@android:color/white"
-        android:padding="16dp"
-        android:inputType="text" />
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shopping App"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_blue"
+            android:layout_marginBottom="8dp" />
 
-    <!-- Campo Contraseña -->
-    <EditText
-        android:id="@+id/etContrasena"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginBottom="32dp"
-        android:hint="Contraseña"
-        android:background="@android:color/white"
-        android:padding="16dp"
-        android:inputType="textPassword" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicia sesión para continuar"
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="48dp" />
 
-    <!-- Botón Iniciar Sesión -->
-    <Button
-        android:id="@+id/btnIniciarSesion"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Iniciar Sesión"
-        android:textColor="@android:color/white"
-        android:background="@android:color/holo_blue_dark"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        <!-- Campo Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Correo electrónico">
 
-    <!-- Botón Ir a Registro -->
-    <Button
-        android:id="@+id/btnIrRegistro"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="¿No tienes cuenta? Regístrate"
-        android:textColor="@android:color/holo_blue_dark"
-        android:background="@android:color/white"
-        android:textSize="14sp"
-        style="?android:attr/borderlessButtonStyle" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:padding="16dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <!-- Campo Contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:hint="Contraseña">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:padding="16dp"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Info de usuario demo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👤 Usa: demo@shopping.com / demo123"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Botón Iniciar Sesión -->
+        <Button
+            android:id="@+id/btnIniciarSesion"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Iniciar Sesión"
+            android:textColor="@color/text_white"
+            android:background="@color/primary_blue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón Ir a Registro -->
+        <Button
+            android:id="@+id/btnIrRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="¿No tienes cuenta? Regístrate"
+            android:textColor="@color/primary_blue"
+            android:background="@color/background_white"
+            android:textSize="14sp"
+            style="?android:attr/borderlessButtonStyle" />
+
+    </LinearLayout>
+</ScrollView>

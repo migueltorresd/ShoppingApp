@@ -11,15 +11,19 @@ class RegistroActivity : AppCompatActivity() {
 
     private lateinit var etNombre: TextInputEditText
     private lateinit var etCorreo: TextInputEditText
+    private lateinit var etTelefono: TextInputEditText
+    private lateinit var etDireccion: TextInputEditText
     private lateinit var etContrasena: TextInputEditText
     private lateinit var etConfirmarContrasena: TextInputEditText
     private lateinit var btnRegistrarse: Button
     private lateinit var btnVolverLogin: Button
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
+        dbHelper = DatabaseHelper(this)
         inicializarVistas()
         configurarEventos()
     }
@@ -27,6 +31,8 @@ class RegistroActivity : AppCompatActivity() {
     private fun inicializarVistas() {
         etNombre = findViewById(R.id.etNombre)
         etCorreo = findViewById(R.id.etCorreo)
+        etTelefono = findViewById(R.id.etTelefono)
+        etDireccion = findViewById(R.id.etDireccion)
         etContrasena = findViewById(R.id.etContrasena)
         etConfirmarContrasena = findViewById(R.id.etConfirmarContrasena)
         btnRegistrarse = findViewById(R.id.btnRegistrarse)
@@ -46,22 +52,37 @@ class RegistroActivity : AppCompatActivity() {
     private fun registrarUsuario() {
         val nombre = etNombre.text.toString().trim()
         val correo = etCorreo.text.toString().trim()
+        val telefono = etTelefono.text.toString().trim()
+        val direccion = etDireccion.text.toString().trim()
         val contrasena = etContrasena.text.toString().trim()
         val confirmarContrasena = etConfirmarContrasena.text.toString().trim()
 
-        if (validarCampos(nombre, correo, contrasena, confirmarContrasena)) {
-            // Simulación de registro exitoso
-            Toast.makeText(this, "¡Registro exitoso! Ahora puedes iniciar sesión", Toast.LENGTH_LONG).show()
+        if (validarCampos(nombre, correo, telefono, direccion, contrasena, confirmarContrasena)) {
+            // Verificar si el email ya existe
+            if (dbHelper.emailExiste(correo)) {
+                Toast.makeText(this, "Este correo ya está registrado", Toast.LENGTH_LONG).show()
+                etCorreo.error = "Email ya registrado"
+                return
+            }
+
+            // Registrar en la base de datos
+            val registrado = dbHelper.registrarUsuario(nombre, correo, telefono, direccion, contrasena)
             
-            // Pasar datos del usuario de vuelta al login (opcional)
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.putExtra("usuario_registrado", correo)
-            startActivity(intent)
-            finish()
+            if (registrado) {
+                Toast.makeText(this, "¡Registro exitoso! Ahora puedes iniciar sesión", Toast.LENGTH_LONG).show()
+                
+                // Volver al login
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.putExtra("usuario_registrado", correo)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Error al registrar. Intenta nuevamente", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
-    private fun validarCampos(nombre: String, correo: String, contrasena: String, confirmarContrasena: String): Boolean {
+    private fun validarCampos(nombre: String, correo: String, telefono: String, direccion: String, contrasena: String, confirmarContrasena: String): Boolean {
         // Limpiar errores previos
         limpiarErrores()
 
@@ -70,6 +91,9 @@ class RegistroActivity : AppCompatActivity() {
         if (nombre.isEmpty()) {
             etNombre.error = "El nombre es requerido"
             isValid = false
+        } else if (nombre.length < 3) {
+            etNombre.error = "El nombre debe tener al menos 3 caracteres"
+            isValid = false
         }
 
         if (correo.isEmpty()) {
@@ -77,6 +101,19 @@ class RegistroActivity : AppCompatActivity() {
             isValid = false
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
             etCorreo.error = "El formato del correo no es válido"
+            isValid = false
+        }
+
+        if (telefono.isEmpty()) {
+            etTelefono.error = "El teléfono es requerido"
+            isValid = false
+        } else if (telefono.length < 10) {
+            etTelefono.error = "Ingresa un teléfono válido (mínimo 10 dígitos)"
+            isValid = false
+        }
+
+        if (direccion.isEmpty()) {
+            etDireccion.error = "La dirección es requerida"
             isValid = false
         }
 
@@ -102,6 +139,8 @@ class RegistroActivity : AppCompatActivity() {
     private fun limpiarErrores() {
         etNombre.error = null
         etCorreo.error = null
+        etTelefono.error = null
+        etDireccion.error = null
         etContrasena.error = null
         etConfirmarContrasena.error = null
     }

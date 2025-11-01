@@ -13,11 +13,13 @@ class LoginActivity : Activity() {
     private lateinit var etContrasena: EditText
     private lateinit var btnIniciarSesion: Button
     private lateinit var btnIrRegistro: Button
+    private lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        dbHelper = DatabaseHelper(this)
         inicializarVistas()
         configurarEventos()
     }
@@ -44,22 +46,35 @@ class LoginActivity : Activity() {
         val contrasena = etContrasena.text.toString().trim()
 
         if (validarCampos(usuario, contrasena)) {
-            // Validación simple para demo - en producción usar autenticación real
-            if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
-                Toast.makeText(this, "¡Bienvenido $usuario!", Toast.LENGTH_SHORT).show()
+            // Validar con base de datos
+            if (dbHelper.validarLogin(usuario, contrasena)) {
+                val nombre = dbHelper.obtenerNombreUsuario(usuario)
+                Toast.makeText(this, "¡Bienvenido $nombre!", Toast.LENGTH_SHORT).show()
                 irAListadoProductos()
+            } else {
+                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
             }
         }
     }
 
     private fun validarCampos(usuario: String, contrasena: String): Boolean {
         if (usuario.isEmpty()) {
-            etUsuario.error = "El usuario es requerido"
+            etUsuario.error = "El email es requerido"
+            return false
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(usuario).matches()) {
+            etUsuario.error = "Ingresa un email válido"
             return false
         }
 
         if (contrasena.isEmpty()) {
             etContrasena.error = "La contraseña es requerida"
+            return false
+        }
+
+        if (contrasena.length < 6) {
+            etContrasena.error = "La contraseña debe tener al menos 6 caracteres"
             return false
         }
 

@@ -1,162 +1,217 @@
-# Shopping App - Aplicación de Compras Android
+# ShoppingApp 🛒
 
-Una aplicación de comercio electrónico desarrollada en Kotlin para Android que permite a los usuarios navegar productos, agregarlos a un carrito y simular el proceso de compra.
+Aplicación móvil de compras desarrollada en Kotlin para Android con funcionalidades completas de e-commerce.
 
-## Características
+## 🎯 Características Implementadas
 
-### Autenticación
-- **Pantalla de Login**: Ingreso con usuario y contraseña
-- **Pantalla de Registro**: Registro de nuevos usuarios con validación de campos
+### ✅ Funcionalidades Principales
+- **Login de Usuario**: Sistema de autenticación con base de datos SQLite
+- **Registro de Clientes**: Formulario completo de registro con validaciones
+- **Listado de Productos**: Catálogo de 10 productos con RecyclerView
+- **Carrito de Compras**: Gestión completa (agregar/eliminar/modificar cantidades)
+- **Geolocalización**: Obtención de ubicación GPS del usuario
+- **Base de Datos SQLite**: Almacenamiento persistente de usuarios
 
-### Tienda
-- **Listado de Productos**: Catálogo con 10 productos predefinidos
-- **Agregar al Carrito**: Funcionalidad para añadir productos al carrito
-- **Contador de Items**: Visualización en tiempo real de productos en carrito
+### ✨ Características Técnicas
+- 🔒 **Validación de Datos**: Email, teléfono, contraseñas seguras
+- 📍 **Permisos en Tiempo Real**: Solicitud dinámica de permisos de ubicación
+- 🎨 **Material Design**: Interfaz moderna y consistente
+- 💾 **Persistencia**: Base de datos SQLite para usuarios
+- 🔄 **Navegación Fluida**: Transiciones suaves entre pantallas
 
-### 🛒 Carrito de Compras
-- **Gestión de Cantidad**: Aumentar/reducir cantidad de productos
-- **Cálculo de Total**: Total automático del costo de compra
-- **Vaciar Carrito**: Opción para eliminar todos los productos
-- **Finalizar Compra**: Simulación del proceso de compra
+## 🛠️ Tecnologías
 
-## Estructura del Proyecto
+- **Lenguaje**: Kotlin
+- **UI**: Android XML Layouts + Material Design Components
+- **Base de Datos**: SQLite (SQLiteOpenHelper)
+- **Geolocalización**: Google Play Services Location API
+- **Arquitectura**: Activity-based con Singleton Pattern (CarritoManager)
+- **Componentes**: RecyclerView, CardView, TextInputLayout
+
+## 📋 Requisitos
+
+- **Android Studio**: Arctic Fox o superior
+- **Kotlin**: 1.8+
+- **Min SDK**: 24 (Android 7.0)
+- **Target SDK**: 34 (Android 14)
+- **Google Play Services**: Para geolocalización
+
+## 📱 Pantallas de la App
+
+### 1. Login (Pantalla de Inicio)
+- Autenticación con email y contraseña
+- Validación de formato de email
+- Usuario demo: `demo@shopping.com` / `demo123`
+- Navegación a registro
+
+### 2. Registro de Usuario
+- Campos: Nombre, Email, Teléfono, Dirección, Contraseña
+- Validaciones completas en todos los campos
+- Verificación de email duplicado
+- Confirmación de contraseña
+
+### 3. Listado de Productos
+- Catálogo de 10 productos tecnológicos
+- Añadir productos al carrito
+- Contador de items en carrito
+- Acceso rápido a carrito y ubicación
+- Botón de cerrar sesión
+
+### 4. Carrito de Compras
+- Ver todos los productos agregados
+- Modificar cantidades (+/-)
+- Eliminar productos
+- Total calculado automáticamente
+- Confirmación de pedido
+
+### 5. Geolocalización
+- Solicitud de permisos en tiempo real
+- Obtención de coordenadas GPS (latitud/longitud)
+- Feedback visual del estado de permisos
+- Manejo de errores
+
+## 💾 Base de Datos
+
+### Tabla: usuarios
+```sql
+CREATE TABLE usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    telefono TEXT,
+    direccion TEXT,
+    password TEXT NOT NULL
+)
+```
+
+### Usuario Demo Precargado
+- **Email**: demo@shopping.com
+- **Contraseña**: demo123
+- **Nombre**: Usuario Demo
+
+## 📦 Estructura del Proyecto
 
 ```
 ShoppingApp/
+│
 ├── app/
 │   ├── src/main/
 │   │   ├── java/com/example/shoppingapp/
-│   │   │   ├── LoginActivity.kt
-│   │   │   ├── RegistroActivity.kt
-│   │   │   ├── ListadoProductosActivity.kt
-│   │   │   ├── CarritoActivity.kt
-│   │   │   ├── Producto.kt
-│   │   │   ├── ItemCarrito.kt
-│   │   │   ├── CarritoManager.kt
-│   │   │   ├── ProductosAdapter.kt
-│   │   │   └── CarritoAdapter.kt
+│   │   │   ├── LoginActivity.kt           # Pantalla de login
+│   │   │   ├── RegistroActivity.kt        # Registro de usuarios
+│   │   │   ├── ListadoProductosActivity.kt # Catálogo
+│   │   │   ├── CarritoActivity.kt         # Carrito de compras
+│   │   │   ├── LocationActivity.kt        # Geolocalización
+│   │   │   ├── DatabaseHelper.kt          # SQLite helper
+│   │   │   ├── CarritoManager.kt          # Singleton del carrito
+│   │   │   ├── Producto.kt                # Modelo de producto
+│   │   │   ├── ItemCarrito.kt             # Modelo item carrito
+│   │   │   ├── ProductosAdapter.kt        # Adapter productos
+│   │   │   └── CarritoAdapter.kt          # Adapter carrito
+│   │   │
 │   │   ├── res/
-│   │   │   ├── layout/
-│   │   │   │   ├── activity_login.xml
-│   │   │   │   ├── activity_registro.xml
-│   │   │   │   ├── activity_listado_productos.xml
-│   │   │   │   ├── activity_carrito.xml
-│   │   │   │   ├── item_producto.xml
-│   │   │   │   └── item_carrito.xml
-│   │   │   ├── values/
-│   │   │   │   ├── colors.xml
-│   │   │   │   └── strings.xml
-│   │   │   └── AndroidManifest.xml
-│   │   └── build.gradle
-│   ├── build.gradle
-│   ├── gradle.properties
-│   └── settings.gradle
+│   │   │   ├── layout/                   # XML layouts
+│   │   │   ├── values/                   # Colores, strings, temas
+│   │   │   └── xml/                      # Configuraciones
+│   │   │
+│   │   └── AndroidManifest.xml
+│   │
+│   └── build.gradle
+│
+├── build.gradle
+├── settings.gradle
+└── README.md
 ```
 
-## Tecnologías Utilizadas
+## 🚀 Instalación y Ejecución
 
-- **Lenguaje**: Kotlin
-- **UI Framework**: Android Views (XML layouts)
-- **Architecture Components**: 
-  - RecyclerView para listas
-  - CardView para elementos de producto
-  - Material Design Components
-- **Navegación**: Intents explícitos entre Activities
+### Paso 1: Clonar el repositorio
+```bash
+git clone <repository-url>
+cd ShoppingApp
+```
 
-## Diseño y UI
+### Paso 2: Abrir en Android Studio
+1. Abrir Android Studio
+2. Seleccionar "Open an Existing Project"
+3. Navegar a la carpeta del proyecto
 
-### Paleta de Colores Personalizada
-- **Azul Principal**: #2196F3
-- **Azul Oscuro**: #1976D2
-- **Naranja Acento**: #FF9800
-- **Verde Éxito**: #4CAF50
-- **Rojo Error**: #F44336
+### Paso 3: Sincronizar dependencias
+```bash
+# Android Studio sincronizará automáticamente
+# O ejecutar manualmente:
+./gradlew build
+```
 
-### Características de Diseño
-- Interfaz moderna con Material Design
-- Layouts responsivos y adaptativos
-- Iconografía consistente
-- Feedback visual para interacciones
+### Paso 4: Ejecutar la app
+1. Conectar dispositivo Android o iniciar emulador
+2. Click en "Run" (Shift + F10)
+3. Seleccionar dispositivo de destino
 
-## Instrucciones para Compilar
+## 📝 Uso de la Aplicación
 
-### Prerrequisitos
-- Android Studio Arctic Fox o superior
-- JDK 8 o superior
-- Android SDK API 24 o superior
+### Primera Vez
+1. **Inicia la app** - Verás la pantalla de Login
+2. **Usa el usuario demo**: 
+   - Email: `demo@shopping.com`
+   - Contraseña: `demo123`
+3. **O crea una cuenta nueva** - Click en "Regístrate"
 
-### Pasos para Compilar
+### Flujo Normal
+1. **Login** → Inicia sesión con tus credenciales
+2. **Explora Productos** → Navega el catálogo
+3. **Agregar al Carrito** → Click en "Agregar" en productos deseados
+4. **Ver Carrito** → Revisa y modifica tu pedido
+5. **Ubicación** → 📍 Obtén tu ubicación GPS (opcional)
+6. **Confirmar Pedido** → Finaliza tu compra
+7. **Cerrar Sesión** → Sal de la app de forma segura
 
-1. **Abrir el proyecto**:
-   ```bash
-   # Abre Android Studio y selecciona "Open an Existing Project"
-   # Navega hasta la carpeta ShoppingApp y ábrela
-   ```
+## 🔑 Permisos Requeridos
 
-2. **Sincronizar dependencias**:
-   - Android Studio automáticamente sincronizará las dependencias
-   - Si no, haz clic en "Sync Now" en la barra superior
+```xml
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
 
-3. **Compilar la aplicación**:
-   - Menú: Build → Make Project (Ctrl+F9)
-   - O usar el botón de compilar en la toolbar
+Los permisos de ubicación se solicitan en tiempo de ejecución al usar la funcionalidad de geolocalización.
 
-4. **Generar APK**:
-   - Menú: Build → Build Bundle(s) / APK(s) → Build APK(s)
-   - El APK se generará en: `app/build/outputs/apk/debug/`
+## 🎨 Diseño y Usabilidad
 
-5. **Ejecutar en dispositivo/emulador**:
-   - Conecta un dispositivo Android o inicia un emulador
-   - Haz clic en Run (▶️) o presiona Shift+F10
+### Paleta de Colores
+- **Primary Blue**: #2196F3
+- **Accent Orange**: #FF9800
+- **Success Green**: #4CAF50
+- **Error Red**: #F44336
+- **Background Light**: #F5F5F5
 
-## Flujo de Navegación
+### Validaciones Implementadas
+- ✅ Email válido (formato correcto)
+- ✅ Contraseña mínimo 6 caracteres
+- ✅ Nombre mínimo 3 caracteres
+- ✅ Teléfono mínimo 10 dígitos
+- ✅ Confirmación de contraseña
+- ✅ Verificación de email duplicado
 
-1. **Login** → Ingreso de credenciales → **Listado de Productos**
-2. **Login** → "¿No tienes cuenta?" → **Registro** → **Login**
-3. **Listado de Productos** → "Ver Carrito" → **Carrito**
-4. **Carrito** → "←" → **Listado de Productos**
+## 📊 Productos Disponibles
 
-## Funcionalidades Implementadas
+1. Smartphone Samsung Galaxy - $299.99
+2. Laptop HP Pavilion - $599.99
+3. Auriculares Sony WH-1000XM4 - $199.99
+4. Tablet iPad Air - $399.99
+5. Smart TV LG 55" - $499.99
+6. Cámara Canon EOS M50 - $449.99
+7. Nintendo Switch - $279.99
+8. Smartwatch Apple Watch SE - $249.99
+9. Altavoz Bluetooth JBL - $79.99
+10. Teclado Mecánico Razer - $89.99
 
-### ✅ Requisitos Cumplidos
+## 👥 Autor
 
-- [x] 4 pantallas (Activities): Login, Registro, Listado, Carrito
-- [x] Diseño visual personalizado con colors.xml
-- [x] Login con campos usuario/contraseña
-- [x] Registro con campos básicos y validaciones
-- [x] Listado de productos con imágenes y botón agregar
-- [x] Carrito con productos agregados y botón finalizar
-- [x] Navegación entre pantallas con Intents
-- [x] AndroidManifest.xml configurado
-- [x] Paleta de colores personalizada
-- [x] Generación de APK funcional
+**Proyecto Universitario**
+- Curso: Desarrollo de Aplicaciones Nativas
+- Fecha: Noviembre 2025
 
-### 🚀 Funcionalidades Adicionales
+## 📄 Licencia
 
-- [x] Validación de formularios
-- [x] Gestión de estado del carrito (Singleton)
-- [x] Cálculo automático de totales
-- [x] Interfaz adaptativa (carrito vacío/con productos)
-- [x] Confirmaciones para acciones importantes
-- [x] RecyclerView para listas eficientes
-- [x] Datos de muestra realistas (10 productos)
-
-## Uso de la Aplicación
-
-1. **Iniciar**: Ingresa cualquier usuario y contraseña
-2. **Explorar**: Navega por el catálogo de productos
-3. **Agregar**: Añade productos al carrito con el botón "Agregar"
-4. **Gestionar**: Ve al carrito para modificar cantidades
-5. **Comprar**: Finaliza la compra con el botón correspondiente
-
-## Notas de Desarrollo
-
-- La aplicación utiliza datos estáticos para demostración
-- No se conecta a servicios backend reales
-- El login acepta cualquier combinación de usuario/contraseña
-- Las compras son simuladas (no procesamiento real)
-- Optimizada para dispositivos Android API 24+
-
----
-
-**Desarrollado con ❤️ en Kotlin para Android**
+Este proyecto es de código abierto y está disponible para fines educativos.
