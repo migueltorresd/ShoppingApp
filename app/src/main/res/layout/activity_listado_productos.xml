@@ -26,15 +26,13 @@
 
         <Button
             android:id="@+id/btnUbicacion"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            android:text="📍 Ubicación"
+            android:text="📍"
             android:textColor="@color/primary_blue"
             android:background="@drawable/card_background"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:paddingHorizontal="12dp"
+            android:textSize="18sp"
             android:elevation="4dp" />
 
         <Button
@@ -54,12 +52,12 @@
             android:id="@+id/btnVerCarrito"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="🛒 Ver Carrito"
+            android:text="🛒 Carrito"
             android:textColor="@color/primary_blue"
             android:background="@drawable/card_background"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:paddingHorizontal="12dp"
+            android:paddingHorizontal="16dp"
             android:elevation="4dp" />
 
     </LinearLayout>
