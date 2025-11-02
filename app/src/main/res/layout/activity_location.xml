@@ -124,11 +124,12 @@
             android:id="@+id/btnObtenerUbicacion"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Obtener Mi Ubicación"
+            android:text="📍 Obtener Mi Ubicación"
             android:textColor="@color/text_white"
-            android:background="@color/accent_orange"
+            android:background="@drawable/button_accent"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:elevation="4dp"
             android:layout_marginBottom="16dp" />
 
         <!-- Información adicional -->
@@ -170,10 +171,10 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Volver"
-            android:textColor="@color/accent_orange"
-            android:background="@color/background_white"
+            android:textColor="@color/primary_blue"
+            android:background="@drawable/button_outlined"
             android:textSize="14sp"
-            style="?android:attr/borderlessButtonStyle" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>

@@ -9,21 +9,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/accent_orange"
-        android:padding="16dp"
+        android:background="@drawable/button_accent"
+        android:padding="20dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:elevation="8dp">
 
         <Button
             android:id="@+id/btnVolver"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:text="←"
             android:textColor="@color/accent_orange"
-            android:background="@color/background_white"
-            android:textSize="16sp"
+            android:background="@drawable/card_background"
+            android:textSize="20sp"
             android:textStyle="bold"
-            style="?android:attr/borderlessButtonStyle"
+            android:elevation="4dp"
             android:layout_marginEnd="16dp" />
 
         <TextView
@@ -102,9 +103,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$0.00"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@color/success_green" />
+                android:textColor="@color/accent_orange" />
 
         </LinearLayout>
 
@@ -118,25 +119,27 @@
             <Button
                 android:id="@+id/btnVaciarCarrito"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="Vaciar Carrito"
-                android:textColor="@color/text_white"
-                android:background="@color/error_red"
-                android:textSize="14sp" />
+                android:text="Vaciar"
+                android:textColor="@color/error_red"
+                android:background="@drawable/button_outlined_error"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnFinalizarCompra"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:text="Finalizar Compra"
                 android:textColor="@color/text_white"
-                android:background="@color/success_green"
+                android:background="@drawable/button_primary"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:elevation="4dp" />
 
         </LinearLayout>
 

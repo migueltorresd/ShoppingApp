@@ -9,16 +9,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="24dp"
         android:gravity="center">
 
         <!-- Logo/Icono de la App -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🛒"
-            android:textSize="64sp"
-            android:layout_marginBottom="24dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="50dp"
+            app:cardBackgroundColor="@color/primary_blue"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="🛒"
+                android:textSize="48sp"
+                android:gravity="center" />
+        </androidx.cardview.widget.CardView>
 
         <!-- Título -->
         <TextView
@@ -43,14 +54,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Correo electrónico">
+            android:hint="Correo electrónico"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:startIconDrawable="@android:drawable/ic_dialog_email"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:padding="16dp"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,14 +75,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:hint="Contraseña">
+            android:hint="Contraseña"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:startIconDrawable="@android:drawable/ic_lock_lock"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:padding="16dp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,9 +108,10 @@
             android:layout_height="56dp"
             android:text="Iniciar Sesión"
             android:textColor="@color/text_white"
-            android:background="@color/primary_blue"
+            android:background="@drawable/button_primary"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:elevation="4dp"
             android:layout_marginBottom="16dp" />
 
         <!-- Botón Ir a Registro -->
@@ -99,9 +121,9 @@
             android:layout_height="56dp"
             android:text="¿No tienes cuenta? Regístrate"
             android:textColor="@color/primary_blue"
-            android:background="@color/background_white"
+            android:background="@drawable/button_outlined"
             android:textSize="14sp"
-            style="?android:attr/borderlessButtonStyle" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>
