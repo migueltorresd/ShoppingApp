@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import java.text.DecimalFormat
 
 class ProductosAdapter(
-    private val productos: List<Producto>,
-    private val onAgregarCarrito: (Producto) -> Unit
+    private var productos: List<Producto>,
+    private val onAgregarCarrito: (Producto) -> Unit,
+    private val onProductoLongClick: ((Producto) -> Unit)? = null
 ) : RecyclerView.Adapter<ProductosAdapter.ProductoViewHolder>() {
 
     private val formatoPrecio = DecimalFormat("$#,##0.00")
@@ -29,6 +30,11 @@ class ProductosAdapter(
 
     override fun getItemCount(): Int = productos.size
 
+    fun actualizarProductos(nuevosProductos: List<Producto>) {
+        productos = nuevosProductos
+        notifyDataSetChanged()
+    }
+
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ivProducto: ImageView = itemView.findViewById(R.id.ivProducto)
         private val tvNombre: TextView = itemView.findViewById(R.id.tvNombreProducto)
@@ -44,6 +50,11 @@ class ProductosAdapter(
 
             btnAgregar.setOnClickListener {
                 onAgregarCarrito(producto)
+            }
+
+            itemView.setOnLongClickListener {
+                onProductoLongClick?.invoke(producto)
+                true
             }
         }
     }

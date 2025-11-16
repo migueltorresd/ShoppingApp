@@ -3,6 +3,7 @@ package com.example.shoppingapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,27 +17,21 @@ class ListadoProductosActivity : AppCompatActivity() {
     private lateinit var btnVerCarrito: Button
     private lateinit var btnUbicacion: Button
     private lateinit var btnCerrarSesion: Button
+    private lateinit var btnAgregarProducto: Button
     private lateinit var tvItemsCarrito: TextView
     private lateinit var productosAdapter: ProductosAdapter
+    private lateinit var dbHelper: DatabaseHelper
 
-    private val productos = listOf(
-        Producto(1, "Smartphone Samsung Galaxy", 299.99, "Teléfono inteligente con pantalla de 6.4 pulgadas y 128GB de almacenamiento"),
-        Producto(2, "Laptop HP Pavilion", 599.99, "Laptop con procesador Intel i5, 8GB RAM y 256GB SSD"),
-        Producto(3, "Auriculares Sony WH-1000XM4", 199.99, "Auriculares inalámbricos con cancelación de ruido"),
-        Producto(4, "Tablet iPad Air", 399.99, "Tablet de 10.9 pulgadas con chip M1 y 64GB"),
-        Producto(5, "Smart TV LG 55\"", 499.99, "Smart TV 4K UHD con WebOS y HDR10"),
-        Producto(6, "Cámara Canon EOS M50", 449.99, "Cámara mirrorless de 24.1MP con grabación 4K"),
-        Producto(7, "Nintendo Switch", 279.99, "Consola de videojuegos híbrida portátil"),
-        Producto(8, "Smartwatch Apple Watch SE", 249.99, "Reloj inteligente con GPS y monitoreo de salud"),
-        Producto(9, "Altavoz Bluetooth JBL", 79.99, "Altavoz portátil resistente al agua"),
-        Producto(10, "Teclado Mecánico Razer", 89.99, "Teclado gaming mecánico con retroiluminación RGB")
-    )
+    private var productos: List<Producto> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listado_productos)
 
+        dbHelper = DatabaseHelper(this)
+
         inicializarVistas()
+        cargarProductosDesdeDb()
         configurarRecyclerView()
         configurarEventos()
         actualizarContadorCarrito()
@@ -52,17 +47,34 @@ class ListadoProductosActivity : AppCompatActivity() {
         btnVerCarrito = findViewById(R.id.btnVerCarrito)
         btnUbicacion = findViewById(R.id.btnUbicacion)
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
+        btnAgregarProducto = findViewById(R.id.btnAgregarProducto)
         tvItemsCarrito = findViewById(R.id.tvItemsCarrito)
     }
 
     private fun configurarRecyclerView() {
-        productosAdapter = ProductosAdapter(productos) { producto ->
-            agregarAlCarrito(producto)
-        }
-        
+        productosAdapter = ProductosAdapter(productos,
+            onAgregarCarrito = { producto ->
+                agregarAlCarrito(producto)
+            },
+            onProductoLongClick = { producto ->
+                mostrarOpcionesProducto(producto)
+            }
+        )
+
         rvProductos.apply {
             adapter = productosAdapter
             layoutManager = LinearLayoutManager(this@ListadoProductosActivity)
+        }
+    }
+
+    private fun cargarProductosDesdeDb() {
+        productos = dbHelper.obtenerProductos()
+        if (productos.isEmpty()) {
+            Toast.makeText(this, "No hay productos registrados", Toast.LENGTH_SHORT).show()
+        }
+
+        if (this::productosAdapter.isInitialized) {
+            productosAdapter.actualizarProductos(productos)
         }
     }
 
@@ -73,6 +85,10 @@ class ListadoProductosActivity : AppCompatActivity() {
         
         btnUbicacion.setOnClickListener {
             irAUbicacion()
+        }
+
+        btnAgregarProducto.setOnClickListener {
+            mostrarDialogoProducto(null)
         }
         
         btnCerrarSesion.setOnClickListener {
@@ -89,6 +105,85 @@ class ListadoProductosActivity : AppCompatActivity() {
     private fun actualizarContadorCarrito() {
         val cantidadItems = CarritoManager.obtenerCantidadTotal()
         tvItemsCarrito.text = "Items en carrito: $cantidadItems"
+    }
+
+    private fun mostrarOpcionesProducto(producto: Producto) {
+        val opciones = arrayOf("Editar", "Eliminar")
+
+        AlertDialog.Builder(this)
+            .setTitle(producto.nombre)
+            .setItems(opciones) { _, which ->
+                when (which) {
+                    0 -> mostrarDialogoProducto(producto)
+                    1 -> confirmarEliminarProducto(producto)
+                }
+            }
+            .show()
+    }
+
+    private fun mostrarDialogoProducto(producto: Producto?) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_producto, null)
+        val etNombre = dialogView.findViewById<EditText>(R.id.etNombreProducto)
+        val etPrecio = dialogView.findViewById<EditText>(R.id.etPrecioProducto)
+        val etDescripcion = dialogView.findViewById<EditText>(R.id.etDescripcionProducto)
+
+        if (producto != null) {
+            etNombre.setText(producto.nombre)
+            etPrecio.setText(producto.precio.toString())
+            etDescripcion.setText(producto.descripcion)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle(if (producto == null) "Agregar producto" else "Editar producto")
+            .setView(dialogView)
+            .setPositiveButton("Guardar") { _, _ ->
+                val nombre = etNombre.text.toString().trim()
+                val precioTexto = etPrecio.text.toString().trim()
+                val descripcion = etDescripcion.text.toString().trim()
+
+                if (nombre.isEmpty() || precioTexto.isEmpty()) {
+                    Toast.makeText(this, "Nombre y precio son obligatorios", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                val precio = precioTexto.toDoubleOrNull()
+                if (precio == null) {
+                    Toast.makeText(this, "El precio debe ser numérico", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                if (producto == null) {
+                    dbHelper.crearProducto(nombre, precio, descripcion)
+                    Toast.makeText(this, "Producto creado", Toast.LENGTH_SHORT).show()
+                } else {
+                    val actualizado = Producto(
+                        id = producto.id,
+                        nombre = nombre,
+                        precio = precio,
+                        descripcion = descripcion,
+                        imagenResId = producto.imagenResId
+                    )
+                    dbHelper.actualizarProducto(actualizado)
+                    Toast.makeText(this, "Producto actualizado", Toast.LENGTH_SHORT).show()
+                }
+
+                cargarProductosDesdeDb()
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+    }
+
+    private fun confirmarEliminarProducto(producto: Producto) {
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar producto")
+            .setMessage("¿Deseas eliminar '${producto.nombre}'?")
+            .setPositiveButton("Eliminar") { _, _ ->
+                dbHelper.eliminarProducto(producto.id)
+                Toast.makeText(this, "Producto eliminado", Toast.LENGTH_SHORT).show()
+                cargarProductosDesdeDb()
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     private fun irAlCarrito() {
