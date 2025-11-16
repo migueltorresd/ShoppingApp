@@ -53,24 +53,17 @@ class CarritoAdapter(
 
             btnReducir.setOnClickListener {
                 CarritoManager.reducirCantidad(producto.id)
-                onCantidadChanged()
                 
-                // Actualizar la vista local inmediatamente
-                if (itemCarrito.cantidad > 1) {
-                    itemCarrito.cantidad--
-                    tvCantidad.text = itemCarrito.cantidad.toString()
-                    tvPrecio.text = formatoPrecio.format(itemCarrito.getPrecioTotal())
-                } else {
-                    // El item será removido, actualizar la lista completa
-                    actualizarItems(CarritoManager.obtenerItems())
-                }
+                // Actualizar la lista completa desde el Manager para evitar desincronización
+                actualizarItems(CarritoManager.obtenerItems())
+                onCantidadChanged()
             }
 
             btnAumentar.setOnClickListener {
                 CarritoManager.aumentarCantidad(producto.id)
-                itemCarrito.cantidad++
-                tvCantidad.text = itemCarrito.cantidad.toString()
-                tvPrecio.text = formatoPrecio.format(itemCarrito.getPrecioTotal())
+                
+                // Actualizar la lista completa desde el Manager para evitar desincronización
+                actualizarItems(CarritoManager.obtenerItems())
                 onCantidadChanged()
             }
         }
