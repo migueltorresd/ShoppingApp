@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Fondo -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M60,40 L140,40 Q150,40 150,50 L150,170 Q150,180 140,180 L60,180 Q50,180 50,170 L50,50 Q50,40 60,40 Z"/>
+    
+    <!-- Pantalla -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,55 L135,55 L135,155 L65,155 Z"/>
+    
+    <!-- Botón home -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M95,165 Q95,160 100,160 Q105,160 105,165 Q105,170 100,170 Q95,170 95,165"/>
+</vector>

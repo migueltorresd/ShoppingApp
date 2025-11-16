@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Pantalla TV -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M30,50 L170,50 L170,140 L30,140 Z"/>
+    
+    <!-- Marco -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,55 L165,55 L165,135 L35,135 Z"/>
+    
+    <!-- Base -->
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M80,140 L120,140 L115,155 L85,155 Z"/>
+</vector>

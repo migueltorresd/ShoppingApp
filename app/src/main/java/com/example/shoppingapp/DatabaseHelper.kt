@@ -77,12 +77,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     private fun insertarProductosIniciales(db: SQLiteDatabase) {
+        // Nota: Las imágenes deben estar en app/src/main/res/drawable/
+        // Si no existen, se usará el icono por defecto
+        
         insertarProductoEnDb(
             db,
             nombre = "Smartphone Samsung Galaxy",
             precio = 299.99,
             descripcion = "Teléfono inteligente con pantalla de 6.4 pulgadas y 128GB de almacenamiento",
-            imagenResId = android.R.drawable.ic_menu_gallery
+            imagenResId = R.drawable.img_smartphone
         )
 
         insertarProductoEnDb(
@@ -90,7 +93,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             nombre = "Laptop HP Pavilion",
             precio = 599.99,
             descripcion = "Laptop con procesador Intel i5, 8GB RAM y 256GB SSD",
-            imagenResId = android.R.drawable.ic_menu_gallery
+            imagenResId = R.drawable.img_laptop
         )
 
         insertarProductoEnDb(
@@ -98,7 +101,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             nombre = "Auriculares Sony WH-1000XM4",
             precio = 199.99,
             descripcion = "Auriculares inalámbricos con cancelación de ruido",
-            imagenResId = android.R.drawable.ic_menu_gallery
+            imagenResId = R.drawable.img_auriculares
         )
 
         insertarProductoEnDb(
@@ -106,7 +109,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             nombre = "Tablet iPad Air",
             precio = 399.99,
             descripcion = "Tablet de 10.9 pulgadas con chip M1 y 64GB",
-            imagenResId = android.R.drawable.ic_menu_gallery
+            imagenResId = R.drawable.img_tablet
         )
 
         insertarProductoEnDb(
@@ -114,7 +117,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             nombre = "Smart TV LG 55\"",
             precio = 499.99,
             descripcion = "Smart TV 4K UHD con WebOS y HDR10",
-            imagenResId = android.R.drawable.ic_menu_gallery
+            imagenResId = R.drawable.img_tv
         )
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Marco tablet -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M50,35 L150,35 Q160,35 160,45 L160,175 Q160,185 150,185 L50,185 Q40,185 40,175 L40,45 Q40,35 50,35 Z"/>
+    
+    <!-- Pantalla -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,45 L145,45 L145,175 L55,175 Z"/>
+</vector>

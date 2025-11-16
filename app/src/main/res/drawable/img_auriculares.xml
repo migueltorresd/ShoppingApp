@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Diadema -->
+    <path
+        android:fillColor="#6366F1"
+        android:pathData="M60,80 Q100,40 140,80"
+        android:strokeWidth="12"
+        android:strokeColor="#6366F1"/>
+    
+    <!-- Auricular izquierdo -->
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M50,80 L70,80 L70,130 L50,130 Z"/>
+    
+    <!-- Auricular derecho -->
+    <path
+        android:fillColor="#8B5CF6"
+        android:pathData="M130,80 L150,80 L150,130 L130,130 Z"/>
+</vector>
