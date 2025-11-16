@@ -104,7 +104,7 @@ class ListadoProductosActivity : AppCompatActivity() {
 
     private fun actualizarContadorCarrito() {
         val cantidadItems = CarritoManager.obtenerCantidadTotal()
-        tvItemsCarrito.text = "Items en carrito: $cantidadItems"
+        tvItemsCarrito.text = "$cantidadItems items"
     }
 
     private fun mostrarOpcionesProducto(producto: Producto) {
