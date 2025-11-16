@@ -30,6 +30,7 @@ class ListadoProductosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_listado_productos)
 
         dbHelper = DatabaseHelper(this)
+        CarritoManager.inicializar(this)
 
         inicializarVistas()
         cargarProductosDesdeDb()

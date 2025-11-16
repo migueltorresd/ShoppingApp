@@ -20,6 +20,7 @@ class LoginActivity : Activity() {
         setContentView(R.layout.activity_login)
 
         dbHelper = DatabaseHelper(this)
+        CarritoManager.inicializar(this)
         inicializarVistas()
         configurarEventos()
     }
