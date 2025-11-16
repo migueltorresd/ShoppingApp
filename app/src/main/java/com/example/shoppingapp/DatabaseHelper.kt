@@ -221,6 +221,72 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return existe
     }
 
+    // Obtener datos completos del usuario por email
+    fun obtenerUsuario(email: String): Usuario? {
+        val db = this.readableDatabase
+        val cursor = db.query(
+            TABLE_USERS,
+            arrayOf(COLUMN_ID, COLUMN_NOMBRE, COLUMN_EMAIL, COLUMN_TELEFONO, COLUMN_DIRECCION),
+            "$COLUMN_EMAIL = ?",
+            arrayOf(email),
+            null, null, null
+        )
+
+        var usuario: Usuario? = null
+        if (cursor.moveToFirst()) {
+            usuario = Usuario(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE)),
+                email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
+                telefono = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TELEFONO)) ?: "",
+                direccion = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DIRECCION)) ?: ""
+            )
+        }
+        cursor.close()
+        return usuario
+    }
+
+    // Actualizar datos del usuario
+    fun actualizarUsuario(email: String, nombre: String, telefono: String, direccion: String): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_NOMBRE, nombre)
+            put(COLUMN_TELEFONO, telefono)
+            put(COLUMN_DIRECCION, direccion)
+        }
+
+        val filasActualizadas = db.update(
+            TABLE_USERS,
+            values,
+            "$COLUMN_EMAIL = ?",
+            arrayOf(email)
+        )
+
+        return filasActualizadas > 0
+    }
+
+    // Cambiar contraseña del usuario
+    fun cambiarPassword(email: String, passwordActual: String, passwordNuevo: String): Boolean {
+        // Primero validar que la contraseña actual es correcta
+        if (!validarLogin(email, passwordActual)) {
+            return false
+        }
+
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_PASSWORD, passwordNuevo)
+        }
+
+        val filasActualizadas = db.update(
+            TABLE_USERS,
+            values,
+            "$COLUMN_EMAIL = ?",
+            arrayOf(email)
+        )
+
+        return filasActualizadas > 0
+    }
+
     // -------------------- CRUD PRODUCTOS --------------------
 
     // Crear un nuevo producto

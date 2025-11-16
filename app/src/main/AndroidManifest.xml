@@ -47,6 +47,12 @@
             android:exported="false"
             android:parentActivityName=".ListadoProductosActivity" />
 
+        <!-- PerfilActivity - Pantalla de perfil de usuario -->
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false"
+            android:parentActivityName=".ListadoProductosActivity" />
+
     </application>
 
 </manifest>

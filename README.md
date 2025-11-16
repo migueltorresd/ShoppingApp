@@ -1,23 +1,27 @@
-# ShoppingApp 🛒
+# ShoppingApp 🛍️
 
-Aplicación móvil de compras desarrollada en Kotlin para Android con funcionalidades completas de e-commerce.
+**Proyecto Final - Desarrollo de Aplicaciones Nativas Android**
+
+Aplicación móvil de compras desarrollada en Kotlin para Android con arquitectura completa, sistema CRUD, gestión de usuarios, carrito de compras y geolocalización.
 
 ## 🎯 Características Implementadas
 
 ### ✅ Funcionalidades Principales
-- **Login de Usuario**: Sistema de autenticación con base de datos SQLite
-- **Registro de Clientes**: Formulario completo de registro con validaciones
-- **Listado de Productos**: Catálogo de 10 productos con RecyclerView
-- **Carrito de Compras**: Gestión completa (agregar/eliminar/modificar cantidades)
-- **Geolocalización**: Obtención de ubicación GPS del usuario
-- **Base de Datos SQLite**: Almacenamiento persistente de usuarios
+- **🔐 Sistema de Autenticación**: Login y registro con validaciones
+- **📝 CRUD de Productos**: Crear, Leer, Actualizar y Eliminar productos (SQLite)
+- **👤 CRUD de Perfil de Usuario**: Ver y editar información personal, cambiar contraseña
+- **🛍️ Carrito de Compras**: Gestión completa (agregar/eliminar/modificar cantidades)
+- **📍 Geolocalización**: Obtención de ubicación GPS en tiempo real
+- **💾 Base de Datos SQLite**: Persistencia de usuarios y productos
 
 ### ✨ Características Técnicas
-- 🔒 **Validación de Datos**: Email, teléfono, contraseñas seguras
+- 🔒 **Validación de Datos**: Email, teléfono, contraseñas seguras (mínimo 6 caracteres)
 - 📍 **Permisos en Tiempo Real**: Solicitud dinámica de permisos de ubicación
-- 🎨 **Material Design**: Interfaz moderna y consistente
-- 💾 **Persistencia**: Base de datos SQLite para usuarios
-- 🔄 **Navegación Fluida**: Transiciones suaves entre pantallas
+- 🎨 **Material Design 3**: Interfaz moderna con modo oscuro automático
+- 🕶️ **Glassmorphism Effects**: Diseño moderno con efectos visuales
+- 💾 **Persistencia Completa**: Base de datos SQLite para usuarios y productos
+- 🔄 **Sesión de Usuario**: SharedPreferences para mantener la sesión activa
+- 🖼️ **Imágenes Reales**: Productos con imágenes reales almacenadas en drawable
 
 ## 🛠️ Tecnologías
 
@@ -36,41 +40,67 @@ Aplicación móvil de compras desarrollada en Kotlin para Android con funcionali
 - **Target SDK**: 34 (Android 14)
 - **Google Play Services**: Para geolocalización
 
-## 📱 Pantallas de la App
+## 🐱 Pantallas de la App
 
-### 1. Login (Pantalla de Inicio)
+### 1. 🔐 Login (Pantalla de Inicio)
 - Autenticación con email y contraseña
 - Validación de formato de email
-- Usuario demo: `demo@shopping.com` / `demo123`
+- Usuario demo precargado: `demo@shopping.com` / `demo123`
 - Navegación a registro
+- Diseño moderno con gradientes
 
-### 2. Registro de Usuario
+### 2. 📝 Registro de Usuario
 - Campos: Nombre, Email, Teléfono, Dirección, Contraseña
 - Validaciones completas en todos los campos
-- Verificación de email duplicado
+- Verificación de email duplicado en base de datos
 - Confirmación de contraseña
+- Material Design con TextInputLayout
 
-### 3. Listado de Productos
-- Catálogo de 10 productos tecnológicos
+### 3. 🛍️ Listado de Productos (Pantalla Principal)
+- Catálogo de productos con imágenes reales
+- **CRUD Completo de Productos**:
+  - ➕ **Crear**: Botón "Nuevo" para agregar productos
+  - 👁️ **Leer**: Visualización en RecyclerView con cards modernos
+  - ✏️ **Actualizar**: Long press en producto → "Editar"
+  - 🗑️ **Eliminar**: Long press en producto → "Eliminar"
 - Añadir productos al carrito
 - Contador de items en carrito
-- Acceso rápido a carrito y ubicación
+- Barra de navegación con iconos:
+  - 👤 Mi Perfil
+  - 📍 Ubicación
+  - 🛍️ Carrito
 - Botón de cerrar sesión
 
-### 4. Carrito de Compras
+### 4. 👤 Mi Perfil (CRUD de Usuario)
+- **Ver información personal**:
+  - Nombre completo
+  - Email (no editable)
+  - Teléfono
+  - Dirección
+- **Editar datos personales**: Actualizar nombre, teléfono y dirección
+- **Cambiar contraseña**:
+  - Validación de contraseña actual
+  - Nueva contraseña con confirmación
+  - Mínimo 6 caracteres
+- Diseño moderno con avatar y cards
+
+### 5. 🛍️ Carrito de Compras
 - Ver todos los productos agregados
-- Modificar cantidades (+/-)
-- Eliminar productos
+- Modificar cantidades (botones + / -)
+- Eliminar productos individualmente
 - Total calculado automáticamente
 - Confirmación de pedido
+- Diseó vertical de botones de cantidad
 
-### 5. Geolocalización
+### 6. 📍 Geolocalización
 - Solicitud de permisos en tiempo real
 - Obtención de coordenadas GPS (latitud/longitud)
+- Visualización clara de coordenadas
 - Feedback visual del estado de permisos
-- Manejo de errores
+- Manejo de errores y estados
+- Diseño moderno con cards informativas
 
-## 💾 Base de Datos
+## 💾 Base de Datos (SQLite)
 
 ### Tabla: usuarios
 ```sql
@@ -84,10 +114,32 @@ CREATE TABLE usuarios (
 )
 ```
 
-### Usuario Demo Precargado
+### Tabla: productos
+```sql
+CREATE TABLE productos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    precio REAL NOT NULL,
+    descripcion TEXT,
+    imagen_res_id INTEGER
+)
+```
+
+### Datos Precargados
+
+**Usuario Demo:**
 - **Email**: demo@shopping.com
 - **Contraseña**: demo123
 - **Nombre**: Usuario Demo
+- **Teléfono**: 1234567890
+- **Dirección**: Calle Principal 123
+
+**Productos Iniciales:** 5 productos tecnológicos con imágenes reales
+- Smartphone Samsung Galaxy - $299.99
+- Laptop HP Pavilion - $599.99
+- Auriculares Sony WH-1000XM4 - $199.99
+- Tablet iPad Air - $399.99
+- Smart TV LG 55" - $499.99
 
 ## 📦 Estructura del Proyecto
 
@@ -99,20 +151,31 @@ ShoppingApp/
 │   │   ├── java/com/example/shoppingapp/
 │   │   │   ├── LoginActivity.kt           # Pantalla de login
 │   │   │   ├── RegistroActivity.kt        # Registro de usuarios
-│   │   │   ├── ListadoProductosActivity.kt # Catálogo
+│   │   │   ├── ListadoProductosActivity.kt # Catálogo + CRUD productos
+│   │   │   ├── PerfilActivity.kt          # Perfil de usuario (CRUD)
 │   │   │   ├── CarritoActivity.kt         # Carrito de compras
-│   │   │   ├── LocationActivity.kt        # Geolocalización
-│   │   │   ├── DatabaseHelper.kt          # SQLite helper
+│   │   │   ├── LocationActivity.kt        # Geolocalización GPS
+│   │   │   ├── DatabaseHelper.kt          # SQLite helper (CRUD)
 │   │   │   ├── CarritoManager.kt          # Singleton del carrito
 │   │   │   ├── Producto.kt                # Modelo de producto
+│   │   │   ├── Usuario.kt                 # Modelo de usuario
 │   │   │   ├── ItemCarrito.kt             # Modelo item carrito
 │   │   │   ├── ProductosAdapter.kt        # Adapter productos
 │   │   │   └── CarritoAdapter.kt          # Adapter carrito
 │   │   │
 │   │   ├── res/
-│   │   │   ├── layout/                   # XML layouts
+│   │   │   ├── drawable/                 # Imágenes de productos
+│   │   │   │   ├── img_smartphone.jpg
+│   │   │   │   ├── img_laptop.jpg
+│   │   │   │   ├── img_auriculares.jpg
+│   │   │   │   ├── img_tablet.jpg
+│   │   │   │   ├── img_tv.jpg
+│   │   │   │   └── *.xml (drawables)
+│   │   │   ├── layout/                   # XML layouts (10 archivos)
 │   │   │   ├── values/                   # Colores, strings, temas
-│   │   │   └── xml/                      # Configuraciones
+│   │   │   │   ├── colors.xml            # Paleta light mode
+│   │   │   │   └── themes.xml            # Material Design 3
+│   │   │   └── values-night/             # Dark mode automático
 │   │   │
 │   │   └── AndroidManifest.xml
 │   │
@@ -178,12 +241,27 @@ Los permisos de ubicación se solicitan en tiempo de ejecución al usar la funci
 
 ## 🎨 Diseño y Usabilidad
 
-### Paleta de Colores
-- **Primary Blue**: #2196F3
-- **Accent Orange**: #FF9800
-- **Success Green**: #4CAF50
-- **Error Red**: #F44336
-- **Background Light**: #F5F5F5
+### Paleta de Colores Moderna
+
+**Light Mode:**
+- **Primary Blue**: #6366F1 (Indigo moderno)
+- **Primary Dark**: #4F46E5
+- **Accent Gold**: #F59E0B (Dorado vibrante)
+- **Background Light**: #F8FAFC
+- **Text Primary**: #1E293B
+
+**Dark Mode (Automático):**
+- **Primary Blue**: #818CF8
+- **Accent Gold**: #FCD34D
+- **Background Dark**: #0F172A (Deep blue-black)
+- **Background Card**: #1E293B (Slate)
+- **Text Primary**: #F1F5F9
+
+### Efectos Visuales
+- 🕶️ **Glassmorphism**: Efectos de vidrio esmerilado en cards
+- 🌌 **Gradientes**: Fondos degradados en headers
+- ✨ **Material Design 3**: Componentes modernos de Google
+- 🌙 **Modo Oscuro**: Activación automática según sistema
 
 ### Validaciones Implementadas
 - ✅ Email válido (formato correcto)
@@ -193,24 +271,85 @@ Los permisos de ubicación se solicitan en tiempo de ejecución al usar la funci
 - ✅ Confirmación de contraseña
 - ✅ Verificación de email duplicado
 
-## 📊 Productos Disponibles
+## 📋 Sistema CRUD - Productos
 
-1. Smartphone Samsung Galaxy - $299.99
-2. Laptop HP Pavilion - $599.99
-3. Auriculares Sony WH-1000XM4 - $199.99
-4. Tablet iPad Air - $399.99
-5. Smart TV LG 55" - $499.99
-6. Cámara Canon EOS M50 - $449.99
-7. Nintendo Switch - $279.99
-8. Smartwatch Apple Watch SE - $249.99
-9. Altavoz Bluetooth JBL - $79.99
-10. Teclado Mecánico Razer - $89.99
+### Productos Iniciales (Precargados)
+1. 📱 Smartphone Samsung Galaxy - $299.99
+2. 💻 Laptop HP Pavilion - $599.99
+3. 🎧 Auriculares Sony WH-1000XM4 - $199.99
+4. 💎 Tablet iPad Air - $399.99
+5. 📺 Smart TV LG 55" - $499.99
+
+### Operaciones CRUD Disponibles
+
+**Crear Producto:**
+- Botón "Nuevo" en pantalla principal
+- Formulario con: Nombre, Precio, Descripción
+- Validación de campos obligatorios
+- Imagen predeterminada asignada
+
+**Leer Productos:**
+- Visualización en lista con RecyclerView
+- Cards con diseño moderno
+- Imágenes, nombre, precio y descripción
+
+**Actualizar Producto:**
+- Long press en cualquier producto
+- Selección "Editar" del menú
+- Modificar nombre, precio o descripción
+
+**Eliminar Producto:**
+- Long press en cualquier producto
+- Selección "Eliminar" del menú
+- Confirmación antes de eliminar
+
+## 🎯 Proyecto Final - Criterios Cumplidos
+
+### ✅ Requisitos Implementados
+
+**1. Sistema CRUD Completo**
+- ✅ CRUD de Productos (Crear, Leer, Actualizar, Eliminar)
+- ✅ CRUD de Perfil de Usuario (Ver, Actualizar, Cambiar contraseña)
+- ✅ Base de datos SQLite con 2 tablas relacionadas
+
+**2. Arquitectura Móvil**
+- ✅ Arquitectura basada en Activities
+- ✅ Patrón Singleton (CarritoManager)
+- ✅ Adaptadores personalizados (RecyclerView)
+- ✅ DatabaseHelper con SQLiteOpenHelper
+
+**3. Código Fuente y Producto**
+- ✅ Código en Kotlin organizado y documentado
+- ✅ Material Design 3 con modo oscuro
+- ✅ Validaciones completas en todos los formularios
+- ✅ Manejo de permisos en tiempo de ejecución
+
+**4. Despliegue en Git**
+- ✅ Repositorio en GitHub
+- ✅ Commits organizados por funcionalidad
+- ✅ README completo con documentación
+- ✅ Branch `feature/proyecto-final`
+
+**5. Funcionalidades Adicionales**
+- ✅ Carrito de compras funcional
+- ✅ Geolocalización GPS
+- ✅ Sistema de autenticación
+- ✅ Sesión persistente
+- ✅ Imágenes reales de productos
+
+## 📦 Entregables
+
+1. **Código Fuente**: Repositorio completo en GitHub
+2. **APK**: Archivo de instalación para Android
+3. **Documentación**: README.md con manual de uso
+4. **Base de Datos**: Esquema SQLite con datos de prueba
 
 ## 👥 Autor
 
 **Proyecto Universitario**
-- Curso: Desarrollo de Aplicaciones Nativas
-- Fecha: Noviembre 2025
+- Curso: Desarrollo de Aplicaciones Nativas Android
+- Actividad: Proyecto Final - Sistema CRUD
+- Fecha: Noviembre 2024
 
 ## 📄 Licencia
 

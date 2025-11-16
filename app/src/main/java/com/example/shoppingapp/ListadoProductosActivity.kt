@@ -15,6 +15,7 @@ class ListadoProductosActivity : AppCompatActivity() {
 
     private lateinit var rvProductos: RecyclerView
     private lateinit var btnVerCarrito: Button
+    private lateinit var btnPerfil: Button
     private lateinit var btnUbicacion: Button
     private lateinit var btnCerrarSesion: Button
     private lateinit var btnAgregarProducto: Button
@@ -45,6 +46,7 @@ class ListadoProductosActivity : AppCompatActivity() {
     private fun inicializarVistas() {
         rvProductos = findViewById(R.id.rvProductos)
         btnVerCarrito = findViewById(R.id.btnVerCarrito)
+        btnPerfil = findViewById(R.id.btnPerfil)
         btnUbicacion = findViewById(R.id.btnUbicacion)
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
         btnAgregarProducto = findViewById(R.id.btnAgregarProducto)
@@ -81,6 +83,10 @@ class ListadoProductosActivity : AppCompatActivity() {
     private fun configurarEventos() {
         btnVerCarrito.setOnClickListener {
             irAlCarrito()
+        }
+        
+        btnPerfil.setOnClickListener {
+            irAPerfil()
         }
         
         btnUbicacion.setOnClickListener {
@@ -188,6 +194,11 @@ class ListadoProductosActivity : AppCompatActivity() {
 
     private fun irAlCarrito() {
         val intent = Intent(this, CarritoActivity::class.java)
+        startActivity(intent)
+    }
+    
+    private fun irAPerfil() {
+        val intent = Intent(this, PerfilActivity::class.java)
         startActivity(intent)
     }
     

@@ -72,13 +72,28 @@
                 app:iconTint="@color/primary_blue" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPerfil"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                app:icon="@android:drawable/ic_menu_myplaces"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/primary_blue"
+                app:backgroundTint="@color/background_white"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUbicacion"
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginEnd="8dp"
-                android:text="📍"
-                android:textSize="20sp"
+                app:icon="@android:drawable/ic_menu_mylocation"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/primary_blue"
                 app:backgroundTint="@color/background_white"
                 app:cornerRadius="12dp" />
 

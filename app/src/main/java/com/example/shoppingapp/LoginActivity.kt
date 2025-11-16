@@ -49,6 +49,14 @@ class LoginActivity : Activity() {
             // Validar con base de datos
             if (dbHelper.validarLogin(usuario, contrasena)) {
                 val nombre = dbHelper.obtenerNombreUsuario(usuario)
+                
+                // Guardar el email en SharedPreferences
+                val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
+                sharedPref.edit().apply {
+                    putString("user_email", usuario)
+                    apply()
+                }
+                
                 Toast.makeText(this, "¡Bienvenido $nombre!", Toast.LENGTH_SHORT).show()
                 irAListadoProductos()
             } else {
